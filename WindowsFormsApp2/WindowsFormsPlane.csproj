@@ -49,6 +49,7 @@
       <DependentUpon>FormPlane.cs</DependentUpon>
     </Compile>
     <Compile Include="IFighter.cs" />
+    <Compile Include="Parking.cs" />
     <Compile Include="Plane.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

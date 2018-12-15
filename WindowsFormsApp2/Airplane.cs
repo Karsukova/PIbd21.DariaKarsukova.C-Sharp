@@ -52,26 +52,29 @@ namespace WindowsFormsPlane
         }
         public override void DrawFighter(Graphics g)
         {
-            Pen pen = new Pen(Color.Black);
-            Brush jr = new SolidBrush(MainColor);
-            g.FillEllipse(jr, StartPosX + 28, StartPosY + 40, 140, 30);
-            g.DrawEllipse(pen, StartPosX + 28, StartPosY + 40, 140, 30);
 
-            g.FillEllipse(jr, StartPosX + 60, StartPosY + 130, 80, 15);
-            g.DrawEllipse(pen, StartPosX + 60, StartPosY + 130, 80, 15);
+            Pen pen = new Pen(Color.Black);
+
+
+            Brush jr = new SolidBrush(MainColor);
+            g.FillEllipse(jr, StartPosX + 28 / 3, StartPosY + 40 / 3, 140 / 3, 30 / 3);
+            g.DrawEllipse(pen, StartPosX + 28 / 3, StartPosY + 40 / 3, 140 / 3, 30 / 3);
+
+            g.FillEllipse(jr, StartPosX + 60 / 3, StartPosY + 130 / 3, 80 / 3, 15 / 3);
+            g.DrawEllipse(pen, StartPosX + 60 / 3, StartPosY + 130 / 3, 80 / 3, 15 / 3);
 
             Brush wing = new SolidBrush(MainColor);
-            g.FillEllipse(wing, StartPosX + 80, StartPosY - 6, 40, 160);
-            g.DrawEllipse(pen, StartPosX + 80, StartPosY - 6, 40, 160);
+            g.FillEllipse(wing, StartPosX + 80 / 3, StartPosY - 6 / 3, 40 / 3, 160 / 3);
+            g.DrawEllipse(pen, StartPosX + 80 / 3, StartPosY - 6 / 3, 40 / 3, 160 / 3);
 
             Brush pp = new SolidBrush(Color.Gray);
-            g.FillEllipse(pp, StartPosX + 85, StartPosY + 26, 30, 15);
-            g.DrawEllipse(pen, StartPosX + 85, StartPosY + 26, 30, 15);
+            g.FillEllipse(pp, StartPosX + 85 / 3, StartPosY + 26 / 3, 30 / 3, 15 / 3);
+            g.DrawEllipse(pen, StartPosX + 85 / 3, StartPosY + 26 / 3, 30 / 3, 15 / 3);
 
-            g.FillEllipse(jr, StartPosX + 97, StartPosY + 120, 7, 30);
-            g.DrawEllipse(pen, StartPosX + 97, StartPosY + 120, 7, 30);
+            g.FillEllipse(jr, StartPosX + 97 / 3, StartPosY + 120 / 3, 7 / 3, 30 / 3);
+            g.DrawEllipse(pen, StartPosX + 97 / 3, StartPosY + 120 / 3, 7 / 3, 30 / 3);
 
-            g.DrawLine(pen, StartPosX + 100, StartPosY + 25, StartPosX + 100, StartPosY + 40);
+            g.DrawLine(pen, StartPosX + 100 / 3, StartPosY + 25 / 3, StartPosX + 100 / 3, StartPosY + 40 / 3);
 
 
         }

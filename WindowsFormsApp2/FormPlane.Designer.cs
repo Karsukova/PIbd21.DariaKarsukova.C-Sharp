@@ -3,9 +3,6 @@
     partial class FormPlane
     {
 
-        /// <summary>
-        /// Обязательная переменная конструктора.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -29,122 +26,121 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonCreate = new System.Windows.Forms.Button();
-            this.buttonDown = new System.Windows.Forms.Button();
-            this.buttonLeft = new System.Windows.Forms.Button();
-            this.buttonRight = new System.Windows.Forms.Button();
-            this.buttonUp = new System.Windows.Forms.Button();
-            this.pictureBoxFighter = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFighter)).BeginInit();
+            this.SetFighterPlane = new System.Windows.Forms.Button();
+            this.pictureFighterPark = new System.Windows.Forms.PictureBox();
+            this.SetPlane = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.maskedTextBox = new System.Windows.Forms.TextBox();
+            this.buttonTakePlane = new System.Windows.Forms.Button();
+            this.pictureBoxTakeCar = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureFighterPark)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeCar)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonCreate
+            // SetFighterPlane
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(8, 8);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(94, 31);
-            this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Создать";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            this.SetFighterPlane.Location = new System.Drawing.Point(956, 96);
+            this.SetFighterPlane.Name = "SetFighterPlane";
+            this.SetFighterPlane.Size = new System.Drawing.Size(234, 76);
+            this.SetFighterPlane.TabIndex = 1;
+            this.SetFighterPlane.Text = "Поставить истребитель";
+            this.SetFighterPlane.UseVisualStyleBackColor = true;
+            this.SetFighterPlane.Click += new System.EventHandler(this.buttonSetFighterPlane_Click);
             // 
-            // buttonDown
+            // pictureFighterPark
             // 
-            this.buttonDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDown.BackgroundImage = global::WindowsFormsPlane.Properties.Resources._31;
-            this.buttonDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonDown.Location = new System.Drawing.Point(794, 402);
-            this.buttonDown.Name = "buttonDown";
-            this.buttonDown.Size = new System.Drawing.Size(30, 30);
-            this.buttonDown.TabIndex = 5;
-            this.buttonDown.UseVisualStyleBackColor = true;
-            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
+            this.pictureFighterPark.Location = new System.Drawing.Point(12, 12);
+            this.pictureFighterPark.Name = "pictureFighterPark";
+            this.pictureFighterPark.Size = new System.Drawing.Size(881, 639);
+            this.pictureFighterPark.TabIndex = 0;
+            this.pictureFighterPark.TabStop = false;
             // 
-            // buttonLeft
+            // SetPlane
             // 
-            this.buttonLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeft.BackgroundImage = global::WindowsFormsPlane.Properties.Resources._41;
-            this.buttonLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonLeft.Location = new System.Drawing.Point(758, 402);
-            this.buttonLeft.Name = "buttonLeft";
-            this.buttonLeft.Size = new System.Drawing.Size(30, 30);
-            this.buttonLeft.TabIndex = 4;
-            this.buttonLeft.UseVisualStyleBackColor = true;
-            this.buttonLeft.Click += new System.EventHandler(this.buttonLeft_Click);
+            this.SetPlane.Location = new System.Drawing.Point(956, 12);
+            this.SetPlane.Name = "SetPlane";
+            this.SetPlane.Size = new System.Drawing.Size(234, 68);
+            this.SetPlane.TabIndex = 6;
+            this.SetPlane.Text = "Поставить самолёт";
+            this.SetPlane.UseVisualStyleBackColor = true;
+            this.SetPlane.Click += new System.EventHandler(this.buttonSetPlane_Click);
             // 
-            // buttonRight
+            // label1
             // 
-            this.buttonRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRight.BackgroundImage = global::WindowsFormsPlane.Properties.Resources._4;
-            this.buttonRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonRight.Location = new System.Drawing.Point(830, 402);
-            this.buttonRight.Name = "buttonRight";
-            this.buttonRight.Size = new System.Drawing.Size(30, 30);
-            this.buttonRight.TabIndex = 3;
-            this.buttonRight.UseVisualStyleBackColor = true;
-            this.buttonRight.Click += new System.EventHandler(this.buttonRight_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(912, 189);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(278, 20);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Забрать самолёт или истребитель";
             // 
-            // buttonUp
+            // label2
             // 
-            this.buttonUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonUp.BackgroundImage = global::WindowsFormsPlane.Properties.Resources._21;
-            this.buttonUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonUp.Location = new System.Drawing.Point(794, 366);
-            this.buttonUp.Name = "buttonUp";
-            this.buttonUp.Size = new System.Drawing.Size(30, 30);
-            this.buttonUp.TabIndex = 2;
-            this.buttonUp.UseVisualStyleBackColor = true;
-            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(995, 230);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 20);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Место";
             // 
-            // pictureBoxFighter
+            // maskedTextBox
             // 
-            this.pictureBoxFighter.Location = new System.Drawing.Point(8, 8);
-            this.pictureBoxFighter.Name = "pictureBoxFighter";
-            this.pictureBoxFighter.Size = new System.Drawing.Size(878, 444);
-            this.pictureBoxFighter.TabIndex = 0;
-            this.pictureBoxFighter.TabStop = false;
-            this.pictureBoxFighter.Click += new System.EventHandler(this.pictureBoxFighter_Click);
+            this.maskedTextBox.Location = new System.Drawing.Point(1081, 224);
+            this.maskedTextBox.Name = "maskedTextBox";
+            this.maskedTextBox.Size = new System.Drawing.Size(77, 26);
+            this.maskedTextBox.TabIndex = 9;
             // 
-            // button1
+            // buttonTakePlane
             // 
-            this.button1.Location = new System.Drawing.Point(162, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(244, 31);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Создать истребитель";
-            this.button1.UseVisualStyleBackColor = true;
-           this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonTakePlane.Location = new System.Drawing.Point(1015, 268);
+            this.buttonTakePlane.Name = "buttonTakePlane";
+            this.buttonTakePlane.Size = new System.Drawing.Size(110, 35);
+            this.buttonTakePlane.TabIndex = 10;
+            this.buttonTakePlane.Text = "Забрать";
+            this.buttonTakePlane.UseVisualStyleBackColor = true;
+            this.buttonTakePlane.Click += new System.EventHandler(this.buttonTakePlane_Click_1);
+            // 
+            // pictureBoxTakeCar
+            // 
+            this.pictureBoxTakeCar.Location = new System.Drawing.Point(956, 373);
+            this.pictureBoxTakeCar.Name = "pictureBoxTakeCar";
+            this.pictureBoxTakeCar.Size = new System.Drawing.Size(229, 178);
+            this.pictureBoxTakeCar.TabIndex = 11;
+            this.pictureBoxTakeCar.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(878, 444);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonDown);
-            this.Controls.Add(this.buttonLeft);
-            this.Controls.Add(this.buttonRight);
-            this.Controls.Add(this.buttonUp);
-            this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.pictureBoxFighter);
+            this.ClientSize = new System.Drawing.Size(1202, 682);
+            this.Controls.Add(this.pictureBoxTakeCar);
+            this.Controls.Add(this.buttonTakePlane);
+            this.Controls.Add(this.maskedTextBox);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.SetPlane);
+            this.Controls.Add(this.SetFighterPlane);
+            this.Controls.Add(this.pictureFighterPark);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormFighter";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFighter)).EndInit();
+            this.Text = "Ангар";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureFighterPark)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeCar)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBoxFighter;
-        private System.Windows.Forms.Button buttonCreate;
-        private System.Windows.Forms.Button buttonUp;
-        private System.Windows.Forms.Button buttonRight;
-        private System.Windows.Forms.Button buttonLeft;
-        private System.Windows.Forms.Button buttonDown;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureFighterPark;
+        private System.Windows.Forms.Button SetFighterPlane;
+        private System.Windows.Forms.Button SetPlane;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox maskedTextBox;
+        private System.Windows.Forms.Button buttonTakePlane;
+        private System.Windows.Forms.PictureBox pictureBoxTakeCar;
     }
 }
-

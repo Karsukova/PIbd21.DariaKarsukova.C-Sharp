@@ -10,67 +10,73 @@ namespace WindowsFormsPlane
 {
     public partial class FormPlane : Form
     {
-        private IFighter fighter;
+        Parking<IFighter> parking;
         public FormPlane()
         {
             InitializeComponent();
+            parking = new Parking<IFighter>(20, pictureFighterPark.Width,
+           pictureBoxTakeCar.Height);
+            Draw();
         }
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxFighter.Width, pictureBoxFighter.Height);
+            Bitmap bmp = new Bitmap(pictureFighterPark.Width, pictureFighterPark.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            fighter.DrawFighter(gr);
-            pictureBoxFighter.Image = bmp;
+            parking.Draw(gr);
+            pictureFighterPark.Image = bmp;
         }
-
-        private void pictureBoxFighter_Click(object sender, EventArgs e)
+        private void buttonSetPlane_Click(object sender, EventArgs e)
         {
-
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var fighter = new Airplane(100, 1000, dialog.Color);
+                int place = parking + fighter;
+                Draw();
+            }
         }
-
-        private void buttonCreate_Click(object sender, EventArgs e)
+        private void buttonSetFighterPlane_Click(object sender, EventArgs e)
         {
-            Random rnd = new Random();
-            fighter = new Airplane(rnd.Next(100, 300), rnd.Next(1000, 2000),
-           Color.Orange);
-            fighter.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxFighter.Width,
-           pictureBoxFighter.Height);
-            Draw();
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Random rnd = new Random();
-            fighter = new FighterPlane(rnd.Next(100, 300), rnd.Next(1000, 2000),
-           Color.Green, Color.Red, true, true);
-            fighter.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxFighter.Width,
-           pictureBoxFighter.Height);
-
-            Draw();
-        }
-        private void buttonRight_Click(object sender, EventArgs e)
-        {
-            fighter.MoveTransport(Direction.Right);
-            Draw();
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                ColorDialog dialogDop = new ColorDialog();
+                if (dialogDop.ShowDialog() == DialogResult.OK)
+                {
+                    var fighter = new FighterPlane(100, 1000, dialog.Color, dialogDop.Color,
+                   true, true);
+                    int place = parking + fighter;
+                    Draw();
+                }
+            }
         }
 
-        private void buttonUp_Click(object sender, EventArgs e)
+
+
+        private void buttonTakePlane_Click_1(object sender, EventArgs e)
         {
-            fighter.MoveTransport(Direction.Up);
-            Draw();
+            if (maskedTextBox.Text != "")
+            {
+                var fighter = parking - Convert.ToInt32(maskedTextBox.Text);
+                if (fighter != null)
+                {
+                    Bitmap bmp = new Bitmap(pictureBoxTakeCar.Width,
+                   pictureBoxTakeCar.Height);
+                    Graphics gr = Graphics.FromImage(bmp);
+                    fighter.SetPosition(5, 5, pictureBoxTakeCar.Width,
+                   pictureBoxTakeCar.Height);
+                    fighter.DrawFighter(gr);
+                    pictureBoxTakeCar.Image = bmp;
+                }
+                else
+                {
+                    Bitmap bmp = new Bitmap(pictureBoxTakeCar.Width,
+                   pictureBoxTakeCar.Height);
+                    pictureBoxTakeCar.Image = bmp;
+                }
+                Draw();
+            }
         }
 
-        private void buttonLeft_Click(object sender, EventArgs e)
-        {
-            fighter.MoveTransport(Direction.Left);
-            Draw();
-        }
-
-        private void buttonDown_Click(object sender, EventArgs e)
-        {
-
-            fighter.MoveTransport(Direction.Down);
-            Draw();
-        }
-
     }
 }
