@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsPlane.Properties {
+namespace WindowsFormsApp2.Properties {
     using System;
     
     

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+
 
 namespace WindowsFormsPlane
 {
@@ -12,7 +15,11 @@ namespace WindowsFormsPlane
         /// <summary>
         /// Массив объектов, которые храним
         /// </summary>
-        private T[] _places;
+        private Dictionary<int, T> _places;
+        /// <summary>
+        /// Максимальное количество мест на парковке
+        /// </summary>
+        private int _maxCount;
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
@@ -37,27 +44,29 @@ namespace WindowsFormsPlane
         /// <param name="pictureHeight">Рамзер парковки - высота</param>
         public Parking(int sizes, int pictureWidth, int pictureHeight)
         {
-            _places = new T[sizes];
+            _maxCount = sizes;
+            _places = new Dictionary<int, T>();
             PictureWidth = pictureWidth;
             PictureHeight = pictureHeight;
-            for (int i = 0; i < _places.Length; i++)
-            {
-                _places[i] = null;
-            }
         }
         /// <summary>
         /// Перегрузка оператора сложения
         /// Логика действия: на парковку добавляется автомобиль
         /// </summary>
         /// <param name="p">Парковка</param>
+        /// <param name="car">Добавляемый автомобиль</param>
         /// <returns></returns>
         public static int operator +(Parking<T> p, T plane)
         {
-            for (int i = 0; i < p._places.Length; i++)
+            if (p._places.Count == p._maxCount)
+            {
+                return -1;
+            }
+            for (int i = 0; i < p._maxCount; i++)
             {
                 if (p.CheckFreePlace(i))
                 {
-                    p._places[i] = plane;
+                    p._places.Add(i, plane);
                     p._places[i].SetPosition(5 + i / 5 * p._placeSizeWidth + 5,
                      i % 5 * p._placeSizeHeight + 15, p.PictureWidth,
                     p.PictureHeight);
@@ -75,41 +84,48 @@ namespace WindowsFormsPlane
         /// <returns></returns>
         public static T operator -(Parking<T> p, int index)
         {
-            if (index < 0 || index > p._places.Length)
-            {
-                return null;
-            }
             if (!p.CheckFreePlace(index))
             {
                 T plane = p._places[index];
-                p._places[index] = null;
+                p._places.Remove(index);
                 return plane;
             }
             return null;
         }
+        /// <summary>
+        /// Метод проверки заполнености парковочного места (ячейки массива)
+        /// </summary>
+        /// <param name="index">Номер парковочного места (порядковый номер в
 
+        /// <returns></returns>
         private bool CheckFreePlace(int index)
         {
-            return _places[index] == null;
+            return !_places.ContainsKey(index);
         }
-
+        /// <summary>
+        /// Метод отрисовки парковки
+        /// </summary>
+        /// <param name="g"></param>
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; i++)
+            var keys = _places.Keys.ToList();
+            
+            for (int i = 0; i < keys.Count; i++)
             {
-                if (!CheckFreePlace(i))
-                {//если место не пустое
-                    _places[i].DrawFighter(g);
-                }
+                _places[keys[i]].DrawFighter(g);
             }
         }
+        /// <summary>
+        /// Метод отрисовки разметки парковочных мест
+        /// </summary>
+        /// <param name="g"></param>
         private void DrawMarking(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 3);
             //границы праковки
-            g.DrawRectangle(pen, 0, 0, (_places.Length / 5) * _placeSizeWidth, 480);
-            for (int i = 0; i < _places.Length / 5; i++)
+            g.DrawRectangle(pen, 0, 0, (_maxCount / 5) * _placeSizeWidth, 480);
+            for (int i = 0; i < _maxCount / 5; i++)
             {//отрисовываем, по 5 мест на линии
                 for (int j = 0; j < 6; ++j)
                 {//линия рамзетки места
