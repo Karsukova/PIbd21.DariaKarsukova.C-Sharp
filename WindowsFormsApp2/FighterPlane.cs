@@ -21,32 +21,31 @@ namespace WindowsFormsPlane
             Weapon = weapon;
             Line = line;
         }
-        
+
         public override void DrawFighter(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
             Brush ff = new SolidBrush(DopColor);
 
-            Pen pp = new Pen(Color.Red);
+            Pen pp = new Pen(DopColor);
             if (Weapon)
             {
-                g.FillEllipse(ff, StartPosX + 48, StartPosY + 40, 7, 25);
-                g.FillEllipse(ff, StartPosX + 59, StartPosY + 35, 7, 25);
-                g.FillEllipse(ff, StartPosX + 70, StartPosY + 32, 7, 25);
+                g.FillEllipse(ff, StartPosX + 48 / 3, StartPosY + 40 / 3, 7 / 3, 25 / 3);
+                g.FillEllipse(ff, StartPosX + 59 / 3, StartPosY + 35 / 3, 7 / 3, 25 / 3);
+                g.FillEllipse(ff, StartPosX + 70 / 3, StartPosY + 32 / 3, 7 / 3, 25 / 3);
 
-                g.FillEllipse(ff, StartPosX + 145, StartPosY + 40, 7, 25);
-                g.FillEllipse(ff, StartPosX + 134, StartPosY + 35, 7, 25);
-                g.FillEllipse(ff, StartPosX + 122, StartPosY + 32, 7, 25);
+                g.FillEllipse(ff, StartPosX + 145 / 3, StartPosY + 40 / 3, 7 / 3, 25 / 3);
+                g.FillEllipse(ff, StartPosX + 134 / 3, StartPosY + 35 / 3, 7 / 3, 25 / 3);
+                g.FillEllipse(ff, StartPosX + 122 / 3, StartPosY + 32 / 3, 7 / 3, 25 / 3);
 
             }
             base.DrawFighter(g);
 
             if (Line)
             {
-                g.DrawLine(pp, StartPosX + 100, StartPosY + 125, StartPosX + 100, StartPosY + 40);
-                g.DrawLine(pp, StartPosX + 80, StartPosY + 105, StartPosX + 120, StartPosY + 105);
-            }
-
+                g.DrawLine(pp, StartPosX + 100 / 3, StartPosY + 125 / 3, StartPosX + 100 / 3, StartPosY + 40 / 3);
+                g.DrawLine(pp, StartPosX + 80 / 3, StartPosY + 105 / 3, StartPosX + 120 / 3, StartPosY + 105 / 3);
+            }
         }
     }
 }
