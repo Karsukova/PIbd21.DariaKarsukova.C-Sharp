@@ -10,7 +10,7 @@ namespace WindowsFormsPlane
 {
     public partial class FormPlane : Form
     {
-        private FighterPlane fighter;
+        private IFighter fighter;
         public FormPlane()
         {
             InitializeComponent();
@@ -23,37 +23,54 @@ namespace WindowsFormsPlane
             pictureBoxFighter.Image = bmp;
         }
 
+        private void pictureBoxFighter_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            fighter = new FighterPlane(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
-           Color.Yellow, true);
+            fighter = new Airplane(rnd.Next(100, 300), rnd.Next(1000, 2000),
+           Color.Orange);
             fighter.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxFighter.Width,
            pictureBoxFighter.Height);
             Draw();
         }
-
-        private void buttonMove_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            //получаем имя кнопки
-            string name = (sender as Button).Name;
-            switch (name)
-            {
-                case "buttonUp":
-                    fighter.MoveTransport(Direction.Up);
-                    break;
-                case "buttonDown":
-                    fighter.MoveTransport(Direction.Down);
-                    break;
-                case "buttonLeft":
-                    fighter.MoveTransport(Direction.Left);
-                    break;
-                case "buttonRight":
-                    fighter.MoveTransport(Direction.Right);
-                    break;
-            }
+            Random rnd = new Random();
+            fighter = new FighterPlane(rnd.Next(100, 300), rnd.Next(1000, 2000),
+           Color.Green, Color.Red, true, true);
+            fighter.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxFighter.Width,
+           pictureBoxFighter.Height);
+
             Draw();
-        }
+        }
+        private void buttonRight_Click(object sender, EventArgs e)
+        {
+            fighter.MoveTransport(Direction.Right);
+            Draw();
+        }
+
+        private void buttonUp_Click(object sender, EventArgs e)
+        {
+            fighter.MoveTransport(Direction.Up);
+            Draw();
+        }
+
+        private void buttonLeft_Click(object sender, EventArgs e)
+        {
+            fighter.MoveTransport(Direction.Left);
+            Draw();
+        }
+
+        private void buttonDown_Click(object sender, EventArgs e)
+        {
+
+            fighter.MoveTransport(Direction.Down);
+            Draw();
+        }
+
     }
 }
