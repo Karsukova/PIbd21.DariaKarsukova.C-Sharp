@@ -47,6 +47,10 @@ namespace WindowsFormsPlane
                 g.DrawLine(pp, StartPosX + 80 / 3, StartPosY + 105 / 3, StartPosX + 120 / 3, StartPosY + 105 / 3);
             }
         }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 }
 
