@@ -13,6 +13,10 @@ namespace WindowsFormsPlane
 
         MultiLevelParking parking;
         /// <summary>
+        /// Форма для добавления
+        /// </summary>
+        FormPlaneConfig form;
+        /// <summary>
         /// Количество уровней-парковок
         /// </summary>
         private const int countLevel = 5;
@@ -35,69 +39,62 @@ namespace WindowsFormsPlane
         {
             if (listBoxLevels.SelectedIndex > -1)
             {
-                Bitmap bmp = new Bitmap(pictureFighterPark.Width, pictureFighterPark.Height);
+                Bitmap bmp = new Bitmap(pictureFighterPark.Width,
+               pictureFighterPark.Height);
                 Graphics gr = Graphics.FromImage(bmp);
                 parking[listBoxLevels.SelectedIndex].Draw(gr);
                 pictureFighterPark.Image = bmp;
             }
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Припарковать автомобиль"
+        /// Метод обработки выбора элемента на listBoxLevels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Draw();
+        }
+        /// <summary>
+        /// Обработка нажатия кнопки "Добавить автомобиль"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonSetPlane_Click(object sender, EventArgs e)
         {
-            if (listBoxLevels.SelectedIndex > -1)
+            form = new FormPlaneConfig();
+            form.AddEvent(AddPlane);
+            form.Show();
+        }
+        /// <summary>
+        /// Метод добавления машины
+        /// </summary>
+        /// <param name="plane"></param>
+        private void AddPlane(IFighter plane)
+        {
+            if (plane != null && listBoxLevels.SelectedIndex > -1)
             {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
+                int place = parking[listBoxLevels.SelectedIndex] + plane;
+                if (place > -1)
                 {
-                    var plane = new Airplane(100, 1000, dialog.Color);
-                    int place = parking[listBoxLevels.SelectedIndex] + plane;
-                    if (place == -1)
-                    {
-                        MessageBox.Show("Нет свободных мест", "Ошибка",
-                       MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
                     Draw();
                 }
-            }
-        }
-        /// <summary>
-        /// Обработка нажатия кнопки "Припарковать гоночный автомобиль"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSetFighterPlane_Click(object sender, EventArgs e)
-        {
-            if (listBoxLevels.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
+                else
                 {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var car = new FighterPlane(100, 1000, dialog.Color, dialogDop.Color,
-                       true, true);
-                        int place = parking[listBoxLevels.SelectedIndex] + car;
-                        if (place == -1)
-                        {
-                            MessageBox.Show("Нет свободных мест", "Ошибка",
-                           MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        Draw();
-                    }
+                    MessageBox.Show("Самолёт не удалось поставить");
                 }
             }
+
+
         }
-        /// <summary>
-        /// Обработка нажатия кнопки "Забрать"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonTakePlane_Click_1(object sender, EventArgs e)
+
+        private void AddPlane(object sender, EventArgs e)
+        {
+            form = new FormPlaneConfig();
+            form.AddEvent(AddPlane);
+            form.Show();
+        }
+        private void buttonTakePlane_Click(object sender, EventArgs e)
         {
             if (listBoxLevels.SelectedIndex > -1)
             {
@@ -124,17 +121,6 @@ namespace WindowsFormsPlane
                     Draw();
                 }
             }
-        }
-        /// <summary>
-        /// Метод обработки выбора элемента на listBoxLevels
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        
-
-        private void listBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Draw();
         }
     }
 }
