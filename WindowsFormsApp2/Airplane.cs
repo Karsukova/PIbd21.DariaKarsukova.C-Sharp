@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Drawing;
-using System.Text;
+
 
 namespace WindowsFormsPlane
 {
     public class Airplane : Plane
     {
+        
         protected const int planeWidth = 163;
         protected const int planeHeight = 160;
         public Airplane(int maxSpeed, float weight, Color mainColor)
@@ -14,6 +16,21 @@ namespace WindowsFormsPlane
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
+        }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="info">Информация по объекту</param>
+        public Airplane(string info)
+        {
+            string[] strs = info.Split(';');
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+            }
         }
         public override void MoveTransport(Direction direction)
         {
@@ -78,5 +95,10 @@ namespace WindowsFormsPlane
 
 
         }
+        public override string ToString()
+        {
+            return MaxSpeed + ";" + Weight + ";" + MainColor.Name;
+        }
     }
+
 }

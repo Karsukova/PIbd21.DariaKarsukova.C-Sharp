@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace WindowsFormsPlane
 {
-    class FighterPlane : Airplane
+    public class FighterPlane : Airplane
     {
         public Color DopColor { private set; get; }
         public bool Weapon { private set; get; }
@@ -22,6 +22,54 @@ namespace WindowsFormsPlane
             Line = line;
         }
 
+        public FighterPlane(string info) : base(info)
+        {
+            string[] strs = info.Split(';');
+            if (strs.Length == 6)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                Weapon = Convert.ToBoolean(strs[4]);
+                Line = Convert.ToBoolean(strs[5]);
+            }
+        }
+        public override void MoveTransport(Direction direction)
+        {
+            float step = MaxSpeed * 100 / Weight;
+            switch (direction)
+            {
+                // вправо
+                case Direction.Right:
+                   if (StartPosX + step < pictureWidth - planeWidth)
+                    {
+                        StartPosX += step;
+                    }
+                    break;
+                //влево
+                case Direction.Left:
+                     if (StartPosX - step > 0)
+                    {
+                        StartPosX -= step;
+                    }
+                    break;
+                //вверх
+                case Direction.Up:
+                    if (StartPosY - step > 0)
+                    {
+                        StartPosY -= step;
+                    }
+                    break;
+                //вниз
+                case Direction.Down:
+                    if (StartPosY + step < pictureHeight - planeHeight)
+                    {
+                        StartPosY += step;
+                    }
+                    break;
+            }
+        }
         public override void DrawFighter(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
@@ -51,6 +99,13 @@ namespace WindowsFormsPlane
         {
             DopColor = color;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + ";" + DopColor.Name + ";" + Weapon + ";" +
+           Line;
+        }
     }
 }
+
 
