@@ -45,6 +45,7 @@ namespace WindowsFormsPlane
             this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.buttonSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFighterPark)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakePlane)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -61,7 +62,7 @@ namespace WindowsFormsPlane
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1246, 313);
+            this.label1.Location = new System.Drawing.Point(1246, 490);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(278, 20);
             this.label1.TabIndex = 7;
@@ -70,7 +71,7 @@ namespace WindowsFormsPlane
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1264, 366);
+            this.label2.Location = new System.Drawing.Point(1284, 555);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 20);
             this.label2.TabIndex = 8;
@@ -78,14 +79,14 @@ namespace WindowsFormsPlane
             // 
             // maskedTextBox
             // 
-            this.maskedTextBox.Location = new System.Drawing.Point(1422, 360);
+            this.maskedTextBox.Location = new System.Drawing.Point(1429, 555);
             this.maskedTextBox.Name = "maskedTextBox";
             this.maskedTextBox.Size = new System.Drawing.Size(77, 26);
             this.maskedTextBox.TabIndex = 9;
             // 
             // buttonTakePlane
             // 
-            this.buttonTakePlane.Location = new System.Drawing.Point(1325, 407);
+            this.buttonTakePlane.Location = new System.Drawing.Point(1340, 612);
             this.buttonTakePlane.Name = "buttonTakePlane";
             this.buttonTakePlane.Size = new System.Drawing.Size(110, 35);
             this.buttonTakePlane.TabIndex = 10;
@@ -95,7 +96,7 @@ namespace WindowsFormsPlane
             // 
             // pictureBoxTakePlane
             // 
-            this.pictureBoxTakePlane.Location = new System.Drawing.Point(1268, 473);
+            this.pictureBoxTakePlane.Location = new System.Drawing.Point(1277, 671);
             this.pictureBoxTakePlane.Name = "pictureBoxTakePlane";
             this.pictureBoxTakePlane.Size = new System.Drawing.Size(229, 178);
             this.pictureBoxTakePlane.TabIndex = 11;
@@ -173,11 +174,22 @@ namespace WindowsFormsPlane
             // 
             this.saveFileDialog.Filter = "txt file | *.txt";
             // 
+            // buttonSort
+            // 
+            this.buttonSort.Location = new System.Drawing.Point(1252, 350);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(233, 97);
+            this.buttonSort.TabIndex = 17;
+            this.buttonSort.Text = "Сортировать уровни";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
+            // 
             // FormPlane
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1524, 877);
+            this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.label3);
@@ -219,6 +231,7 @@ namespace WindowsFormsPlane
         private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button buttonSort;
     }
 }
 

@@ -1,4 +1,9 @@
 ﻿using System.Collections.Generic;
+using System;
+using System.Collections;
+using System.Text;
+using System.Threading.Tasks;
+
 using System.Drawing;
 using System.Linq;
 
@@ -8,7 +13,7 @@ namespace WindowsFormsPlane
     /// Параметризованны класс для хранения набора объектов от интерфейса ITransport
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Parking<T> where T : class, IFighter
+    public class Parking<T> : IEnumerator<T>, IEnumerable<T>, IComparable<Parking<T>> where T : class, IFighter
     {
         /// <summary>
         /// Массив объектов, которые храним
@@ -18,6 +23,9 @@ namespace WindowsFormsPlane
         /// Максимальное количество мест на парковке
         /// </summary>
         private int _maxCount;
+
+        public int _currentIndex;
+
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
@@ -40,10 +48,27 @@ namespace WindowsFormsPlane
         /// <param name="sizes">Количество мест на парковке</param>
         /// <param name="pictureWidth">Рамзер парковки - ширина</param>
         /// <param name="pictureHeight">Рамзер парковки - высота</param>
+        public T Current
+        {
+            get
+            {
+                return _places[_places.Keys.ToList()[_currentIndex]];
+            }
+        }
+
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
         public Parking(int sizes, int pictureWidth, int pictureHeight)
         {
             _maxCount = sizes;
             _places = new Dictionary<int, T>();
+            _currentIndex = -1;
+
             PictureWidth = pictureWidth;
             PictureHeight = pictureHeight;
         }
@@ -52,9 +77,9 @@ namespace WindowsFormsPlane
         /// Логика действия: на парковку добавляется автомобиль
         /// </summary>
         /// <param name="p">Парковка</param>
-        /// <param name="car">Добавляемый автомобиль</param>
+        /// <param name="plane">Добавляемый автомобиль</param>
         /// <returns></returns>
-        public static int operator +(Parking<T> p, T car)
+        public static int operator +(Parking<T> p, T plane)
         {
             if (p._places.Count == p._maxCount)
             {
@@ -64,11 +89,25 @@ namespace WindowsFormsPlane
             {
                 if (p.CheckFreePlace(i))
                 {
-                    p._places.Add(i, car);
+                    p._places.Add(i, plane);
                     p._places[i].SetPosition(5 + i / 5 * p._placeSizeWidth + 5,
                      i % 5 * p._placeSizeHeight + 15, p.PictureWidth,
                     p.PictureHeight);
                     return i;
+                }
+                else if (plane.GetType() == p._places[i].GetType())
+                {
+                    if (plane is FighterPlane)
+                    {
+                        if ((plane as FighterPlane).Equals(p._places[i]))
+                        {
+                            throw new ParkingAlreadyHaveException();
+                        }
+                    }
+                    else if ((plane as Airplane).Equals(p._places[i]))
+                    {
+                        throw new ParkingAlreadyHaveException();
+                    }
                 }
             }
             return -1;
@@ -131,6 +170,74 @@ namespace WindowsFormsPlane
                 g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth, 400);
             }
         }
+
+        public void Dispose()
+        {
+            _places.Clear();
+        }
+
+        public bool MoveNext()
+        {
+            if (_currentIndex + 1 >= _places.Count)
+            {
+                Reset();
+                return false;
+            }
+            _currentIndex++;
+            return true;
+        }
+
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public int CompareTo(Parking<T> other)
+        {
+            if (_places.Count > other._places.Count)
+            {
+                return -1;
+            }
+            else if (_places.Count < other._places.Count)
+            {
+                return 1;
+            }
+            else if (_places.Count > 0)
+            {
+                var thisKeys = _places.Keys.ToList();
+                var otherKeys = other._places.Keys.ToList();
+                for (int i = 0; i < _places.Count; ++i)
+                {
+                    if (_places[thisKeys[i]] is Airplane && other._places[thisKeys[i]] is FighterPlane)
+                    {
+                        return 1;
+                    }
+                    if (_places[thisKeys[i]] is FighterPlane && other._places[thisKeys[i]] is Airplane)
+                    {
+                        return -1;
+                    }
+                    if (_places[thisKeys[i]] is Airplane && other._places[thisKeys[i]] is Airplane)
+                    {
+                        return (_places[thisKeys[i]] is Airplane).CompareTo(other._places[thisKeys[i]] is Airplane);
+                    }
+                    if (_places[thisKeys[i]] is FighterPlane && other._places[thisKeys[i]] is FighterPlane)
+                    {
+                        return (_places[thisKeys[i]] is FighterPlane).CompareTo(other._places[thisKeys[i]] is FighterPlane);
+                    }
+                }
+            }
+            return 0;
+        }
         /// <summary>
         /// Индексатор
         /// </summary>
@@ -144,7 +251,7 @@ namespace WindowsFormsPlane
                 {
                     return _places[ind];
                 }
-                return null;
+                throw new ParkingNotFoundException(ind);
             }
             set
             {
