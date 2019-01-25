@@ -79,28 +79,22 @@ namespace WindowsFormsPlane
                     {
                         //Начинаем уровень
                         WriteToFile("Level" + Environment.NewLine, fs);
-                        for (int i = 0; i < countPlaces; i++)
+                        foreach (var plane in level)
                         {
-                            try
-                            {
-
-                                var plane = level[i];
-                                if (plane == null)
-
-                                    continue;
+                           
+                         
                                 //Записываем тип мшаины
                                 if (plane.GetType().Name == "Airplane")
                                 {
-                                    WriteToFile(i + ":Airplane:", fs);
+                                    WriteToFile( ":Airplane:", fs);
                                 }
                                 if (plane.GetType().Name == "FighterPlane")
                                 {
-                                    WriteToFile(i + ":FighterPlane:", fs);
+                                    WriteToFile( ":FighterPlane:", fs);
                                 }
                                 //Записываемые параметры
                                 WriteToFile(plane + Environment.NewLine, fs);
-                            }
-                            finally { }
+                           
                         }
                     }
                 }
@@ -183,6 +177,11 @@ namespace WindowsFormsPlane
                 }
                 parkingStages[counter][Convert.ToInt32(strs[i].Split(':')[0])] = plane;
             }
+        }
+
+        public void Sort()
+        {
+            parkingStages.Sort();
         }
     }
 }

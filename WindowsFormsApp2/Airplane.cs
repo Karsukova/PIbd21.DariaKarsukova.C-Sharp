@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text;
+
 using System.Drawing;
 
 
 namespace WindowsFormsPlane
 {
-    public class Airplane : Plane
+    public class Airplane : Plane, IComparable<Airplane>, IEquatable<Airplane>
     {
         
         protected const int planeWidth = 163;
@@ -98,6 +99,70 @@ namespace WindowsFormsPlane
         public override string ToString()
         {
             return MaxSpeed + ";" + Weight + ";" + MainColor.Name;
+        }
+
+        public int CompareTo(Airplane other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return MaxSpeed.CompareTo(other.MaxSpeed);
+            }
+            if (Weight != other.Weight)
+            {
+                return Weight.CompareTo(other.Weight);
+            }
+            if (MainColor != other.MainColor)
+            {
+                MainColor.Name.CompareTo(other.MainColor.Name);
+            }
+            return 0;
+        }
+
+        public bool Equals(Airplane other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            Airplane elecLocObj = obj as Airplane;
+            if (elecLocObj == null)
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(elecLocObj);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 

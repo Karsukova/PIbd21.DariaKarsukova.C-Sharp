@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace WindowsFormsPlane
 {
-    public class FighterPlane : Airplane
+    public class FighterPlane : Airplane, IComparable<FighterPlane>, IEquatable<FighterPlane>
     {
         public Color DopColor { private set; get; }
         public bool Weapon { private set; get; }
@@ -104,6 +104,73 @@ namespace WindowsFormsPlane
         {
             return base.ToString() + ";" + DopColor.Name + ";" + Weapon + ";" +
            Line;
+        }
+        public bool Equals(FighterPlane other)
+        {
+            var res = (this as Airplane).Equals(other as Airplane);
+            if (!res)
+            {
+                return res;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (Weapon != other.Weapon)
+            {
+                return false;
+            }
+            if (Line != other.Line)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            FighterPlane monorailObj = obj as FighterPlane;
+            if (monorailObj == null)
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(monorailObj);
+            }
+        }
+
+        public int CompareTo(FighterPlane other)
+        {
+            var res = (this is Airplane).CompareTo(other is Airplane);
+            if (res != 0)
+            {
+                return res;
+            }
+            if (DopColor != other.DopColor)
+            {
+                DopColor.Name.CompareTo(other.DopColor.Name);
+            }
+            if (Weapon != other.Weapon)
+            {
+                return Weapon.CompareTo(other.Weapon);
+            }
+            if (Line != other.Line)
+            {
+                return Line.CompareTo(other.Line);
+            }
+            
+            return 0;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
